@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-lg-12">
+
+    <h3>
+      <%= post.title %>
+    </h3>
+
+    <p><i class="fa fa-calendar"></i>
+      <%= moment(post.createdAt).format("DD-MM-YYYY HH:mm") %>
+    </p>
+    <p><i class="fa fa-user"></i>
+      <%= post.author.name %>
+    </p>
+    <% if (post.tags.length > 0) { %>
+        <p><i class="fa fa-tags"></i> Tags:
+          <% var j; for (j in post.tags) { %>
+            <a href="/tags/<%= escape(post.tags[j].trim())%>"><span class="badge badge-info"><%= post.tags[j].trim() %></span></a>
+          <% } %>
+        </p>
+      <% } %>
+    <hr>
+
+    <p class="lead">
+      <%- escapeText(post.body) %>
+    </p>
+
+    <hr>
+
+    <% if (session.user) { %>
+      <div class="well">
+        <%- include ../comments/new.ejs %>
+      </div>
+   <hr />
+   <% } %>
+
+   <%- include ../comments/index.ejs %>
+
+  </div>
+</div>

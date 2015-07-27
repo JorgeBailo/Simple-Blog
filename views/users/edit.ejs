@@ -1,0 +1,8 @@
+<div class="page-header">
+    <h4>
+      Editar Usuario "<strong><%= user.login %></strong>"
+    </h4>
+</div>
+<form method='post' action='/users/<%= user.id %>?_method=put' class="form-horizontal" role="form">
+  <%- include _form.ejs %>
+</form>

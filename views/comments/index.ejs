@@ -1,0 +1,19 @@
+<% for (var i in comments) { %>
+  <div class="media">
+      <div class="media-body">
+          <h4 class="media-heading">
+              <%= comments[i].Author && comments[i].Author.name || "Sin autor" %>
+              <small><%= moment(comments[i].createdAt).format("DD-MM-YYYY HH:mm") %></small>
+          </h4>
+          <%- escapeText(comments[i].body) %>
+      </div>
+      <% if (session.user && session.user.id == comments[i].AuthorId) {%>
+          <p>
+            <form method='post' action='/posts/<%= post.id %>/comments/<%= comments[i].id %>/?_method=delete'>
+              <a href="/posts/<%= post.id %>/comments/<%= comments[i].id %>/edit" class="btn btn-warning" role="button"> Editar </a>
+              <button class="btn btn-danger" type="submit" onClick="return confirm('¿Seguro que desea borrar el comentario?');">Borrar</button>
+            </form>
+          </p>
+      <% } %>
+  </div>
+<% } %>

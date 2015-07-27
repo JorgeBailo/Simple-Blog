@@ -1,0 +1,26 @@
+<div class="page-header">
+    <h4>
+      Login
+    </h4>
+</div>
+<form method="post" action="/login" class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="preg" class="col-lg-2 control-label">Login:</label>
+    <div class="col-lg-6">
+      <input type="text" id="login" name="login" placeholder="Su usuario" class="form-control" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="resp" class="col-lg-2 control-label">Password:</label>
+    <div class="col-lg-6">
+      <input type="password" id="password" name="password" placeholder="Su Contraseña" class="form-control" />
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <a href="/" class="btn btn-default" role="button">Cancelar</a>
+      <input type="submit" value="Login" class="btn btn-success">
+    </div>
+  </div>
+  <input type='hidden' name='redir' value='<%= redir %>'>
+</form>

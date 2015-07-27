@@ -1,0 +1,25 @@
+<div class="form-group">
+  <label for="post_title" class="col-lg-2 control-label">Título:</label>
+  <div class="col-lg-6">
+    <input type="text" id="post_title" name="post[title]" class="form-control" value='<%= post.title%>' />
+  </div>
+</div>
+<div class="form-group">
+  <label for="post_body" class="col-lg-2 control-label">Contenido:</label>
+  <div class="col-lg-6">
+    <textarea id="post_body" name="post[body]" class="form-control" rows="15"><%= post.body %></textarea>
+  </div>
+</div>
+<div class="form-group">
+  <label for="post_tags" class="col-lg-2 control-label">Tags:</label>
+  <div class="col-lg-6">
+    <input type="text" id="post_tags" name="post[tags]" class="form-control" value='<%= post.tags %>' />
+    <span class="help-block">Taxonomías separadas por comas.</span>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-lg-offset-2 col-lg-10">
+    <a href="/posts" class="btn btn-default" role="button">Cancelar</a>
+    <input type="submit" value="Guardar" class="btn btn-success" />
+  </div>
+</div>

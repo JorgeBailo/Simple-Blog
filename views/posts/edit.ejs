@@ -1,0 +1,8 @@
+<div class="page-header">
+    <h4>
+      Editar Post "<strong><%= post.title %></strong>"
+    </h4>
+</div>
+<form method="post" action="/posts/<%= post.id %>?_method=put" class="form-horizontal" role="form">
+  <%- include _form.ejs %>
+</form>

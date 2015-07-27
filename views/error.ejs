@@ -1,3 +1,15 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<h2> Atención </h2>
+<p>
+  El Servidor ha experimentado un pequeño problema:
+  </em>(Código:<%= error.status || 500 %>)</em>
+</p>
+
+<p>
+  <strong>
+    <%= message %>
+  </strong>
+</p>
+
+<pre>
+  <%= error.stack || '' %>
+</pre>

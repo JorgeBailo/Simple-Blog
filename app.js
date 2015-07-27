@@ -1,12 +1,13 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
-
+var partials = require('express-partials');
+var methodOverride = require('method-override');
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var flash = require('express-flash');
 
 var app = express();
 
@@ -14,25 +15,43 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(bodyParser.urlencoded());
+app.use(methodOverride('_method'));
+app.use(cookieParser('simple-blog-imagina'));
+app.use(session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use(partials());
+app.use(flash());
 
-// catch 404 and forward to error handler
+// Helper dinamico: Hacer visible req.session en las vistas
+app.use(function(req, res, next) {
+  res.locals.session = req.session;
+  next();
+});
+
+// Helper estatico: Escapar texto
+app.locals.escapeText = function(text) {
+  return String(text)
+    .replace(/&(?!\w+;)/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/\n/g, '<br>');
+};
+
+app.use('/', routes);
+
+// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handlers
+/// error handlers
 
 // development error handler
 // will print stacktrace

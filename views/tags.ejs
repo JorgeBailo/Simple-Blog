@@ -1,0 +1,33 @@
+<div class="page-header">
+    <h4>
+      Lista de Posts con filtro <strong>"<%= filtro %>"</strong>
+    </h4>
+</div>
+
+<% if (posts.length > 0) { %>
+  <% var i; for (i=0; i < posts.length; i++) { %>
+    <div class="col-lg-6">
+      <h3>
+        <a href="/posts/<%= posts[i].id%>">
+          <%= posts[i].title %>
+        </a>
+      </h3>
+      <p><i class="fa fa-calendar"></i>
+        <%= moment(posts[i].createdAt).format("DD-MM-YYYY HH:mm") %>
+      </p>
+      <p><i class="fa fa-user"></i>
+        <%= posts[i].Author.name %>
+      </p>
+      <% if (posts[i].tags.length > 0) { %>
+          <p><i class="fa fa-tags"></i> Tags:
+            <% var j; for (j in posts[i].tags) { %>
+              <a href="/tags/<%= escape(posts[i].tags[j].trim())%>"><span class="badge badge-info"><%= posts[i].tags[j].trim() %></span></a>
+              <% } %>
+          </p>
+        <% } %>
+      <hr>
+    </div>
+  <% } %>
+<% } else { %>
+<p> No se han encontrado posts </p>
+<% } %>

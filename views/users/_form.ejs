@@ -1,0 +1,58 @@
+<script>
+  function confirmPassword() {
+    var pw1 = document.getElementById('user_password').value;
+    var pw2 = document.getElementById('user_confirm_password').value;
+
+    <% if ( !user.id) { %>
+    if (!pw1 || !pw2) {
+      alert('Debe rellenar los campos de Password y Confirmación.');
+      return false;
+    }
+    <% } %>
+
+    if (pw1 === pw2) {
+      return true;
+    } else {
+      alert('Los passwords introducidos no coinciden.');
+      return false;
+    }
+  }
+</script>
+<div class="form-group">
+  <% if ( !user.id) { %>
+    <label for="user_login" class="col-lg-2 control-label">Login:</label>
+    <div class="col-lg-6">
+      <input type="text" id="user_login" name="user[login]" class="form-control" value='<%= user.login %>' />
+    </div>
+    <% } %>
+</div>
+<div class="form-group">
+  <label for="user_name" class="col-lg-2 control-label">Nombre:</label>
+  <div class="col-lg-6">
+    <input type="text" id="user_name" name="user[name]" class="form-control" value='<%= user.name %>' />
+  </div>
+</div>
+<div class="form-group">
+  <label for="user_email" class="col-lg-2 control-label">Email:</label>
+  <div class="col-lg-6">
+    <input type="text" id="user_email" name="user[email]" class="form-control" value='<%= user.email %>' />
+  </div>
+</div>
+<div class="form-group">
+  <label for="user_password" class="col-lg-2 control-label">Password:</label>
+  <div class="col-lg-6">
+    <input type="password" id="user_password" name="user[password]" class="form-control" value='' />
+  </div>
+</div>
+<div class="form-group">
+  <label for="user_confirm_password" class="col-lg-2 control-label">Confirmar Password:</label>
+  <div class="col-lg-6">
+    <input type="password" id="user_confirm_password" class="form-control" value='' />
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-lg-offset-2 col-lg-10">
+    <a href="/users" class="btn btn-default" role="button">Cancelar</a>
+    <input type="submit" value="Enviar" class="btn btn-success" onclick='return confirmPassword()' />
+  </div>
+</div>
