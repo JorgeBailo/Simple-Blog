@@ -106,7 +106,7 @@ exports.all = function(req, res, next) {
     var filtro = (decodeURIComponent(xss(req.query.search)) || '');
     models.Post
       .findAll({
-        where: ["lower(title) like ?", '%' + filtro + '%'],
+        where: ["lower(title) like lower(?)", '%' + filtro + '%'],
         order: [
           ['updatedAt', 'DESC']
         ],
