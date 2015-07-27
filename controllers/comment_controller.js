@@ -169,7 +169,7 @@ exports.update = function(req, res, next) {
 
     req.comment.save(['body'])
     .then(function() {
-      req.flash('success', 'Commentario actualizado con éxito.');
+      req.flash('success', 'Comentario actualizado con éxito.');
       res.redirect('/posts/' + req.post.id);
     })
     .catch(function(error) {

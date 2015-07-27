@@ -7,7 +7,7 @@
           </h4>
           <%- escapeText(comments[i].body) %>
       </div>
-      <% if (session.user && session.user.id == comments[i].AuthorId) {%>
+      <% if (session.user && (session.user.id == comments[i].AuthorId || session.user.isAdmin == true)) { %>
           <p>
             <form method='post' action='/posts/<%= post.id %>/comments/<%= comments[i].id %>/?_method=delete'>
               <a href="/posts/<%= post.id %>/comments/<%= comments[i].id %>/edit" class="btn btn-warning" role="button"> Editar </a>
