@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     tags: {
       type: DataTypes.STRING,
       get: function() {
-          return this.getDataValue('tags').split(',');
+          if (this.getDataValue('tags')) return this.getDataValue('tags').split(',');
       },
     },
   });

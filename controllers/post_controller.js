@@ -56,7 +56,7 @@ exports.index = function(req, res, next) {
     models.Post
       .findAll({
         where: {
-          authorId: req.session.user.id
+          AuthorId: req.session.user.id
         },
         order: [
           ['updatedAt', 'DESC']
