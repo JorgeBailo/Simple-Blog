@@ -49,4 +49,7 @@ router.get('/users/:userid([0-9]+)/edit', sessionController.loginRequired, userC
 router.put('/users/:userid([0-9]+)', sessionController.loginRequired, userController.loggedUserIsUser, userController.update);
 router.delete('/users/:userid([0-9]+)', sessionController.loginRequired, userController.loggedUserIsUser, userController.destroy);
 
+// Rutas API
+router.get('/api/posts', postController.api);
+
 module.exports = router;

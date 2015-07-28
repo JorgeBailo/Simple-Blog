@@ -134,7 +134,7 @@ exports.tags = function(req, res, next) {
   var filtro = decodeURIComponent(xss(req.params.tag));
   models.Post
     .findAll({
-      where: ["lower(tags) like ?", '%' + filtro + '%'],
+      where: ["lower(tags) like lower(?)", '%' + filtro + '%'],
       order: [
         ['updatedAt', 'DESC']
       ],
@@ -302,5 +302,27 @@ exports.destroy = function(req, res, next) {
     })
     .catch(function(error) {
       next(error)
+    });
+};
+
+// GET /api/posts
+exports.api = function(req, res) {
+  models.Post
+    .findAll({
+      attributes: ['id', 'title', 'body', 'createdAt', 'updatedAt', 'tags'],
+      order: [
+        ['updatedAt', 'DESC']
+      ],
+      include: [{
+        model: models.User,
+        as: 'Author',
+        attributes: ['name']
+      }]
+    })
+    .then(function(posts) {
+      res.status(200).jsonp(posts);
+    })
+    .catch(function(error) {
+      res.send(500, "Error en la Aplicación");
     });
 };
